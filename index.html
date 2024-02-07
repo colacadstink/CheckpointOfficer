@@ -9,9 +9,13 @@
 </head>
 <body onload="start()">
 <script src="./index.js"></script>
-<label><input id="query" value="st:expansion game:paper" placeholder="Scryfall query"></label>
-<label><textarea id="cardList" placeholder="Card list"></textarea></label>
-<button id="checkButton">Check!</button>
-<pre id="output"></pre>
+<div style="display: flex; flex-direction: column; max-width: 400px; margin: 0 auto">
+    <input id="query" value="st:expansion game:paper" placeholder="Scryfall query">
+    <br>
+    <textarea style="height: 300px" id="cardList" placeholder="Card list"></textarea>
+    <br>
+    <button id="checkButton">Check!</button>
+    <pre id="output"></pre>
+</div>
 </body>
 </html>

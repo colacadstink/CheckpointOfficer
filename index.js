@@ -83,6 +83,7 @@ function start() {
     event.preventDefault();
     event.stopPropagation();
 
+    setOutput('Searching...');
     /** @type {string} */
     const query = document.getElementById('query').value;
     /** @type {string} */
