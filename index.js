@@ -110,7 +110,8 @@ function start() {
         return match[1];
       })
       .map((card) => card.toLowerCase())
-      .filter((card) => !!card);
+      .filter((card) => !!card)
+      .filter((card) => card !== 'sideboard');
     const cardSet = new Set(cards);
     await checkCards([...cardSet], query);
   });
