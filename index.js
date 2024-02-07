@@ -11,7 +11,10 @@ function constructQueries(baseQuery, cards) {
   const queries = [];
 
   let curCardChunk = '';
-  for(const card of cards) {
+  for(let card of cards) {
+    if(card.includes(' ')) {
+      card = `"${card}"`;
+    }
     // Construct a new chunk for if we did add this card to the current query
     let newCardChunk = '';
     if(!curCardChunk) {
@@ -62,7 +65,15 @@ async function checkCards(cards, query) {
     }
     const cardObjects = data.data;
     for(const cardObj of cardObjects) {
-      missingCards.delete(cardObj.name.toLowerCase());
+      const foundName = cardObj.name;
+      missingCards.delete(foundName.toLowerCase());
+      if(foundName.includes('//')) {
+        const halves = foundName.split(/\s*\/\/\s*/);
+        console.log(halves);
+        for(const piece of halves) {
+          missingCards.delete(piece.toLowerCase());
+        }
+      }
       foundCards.push(cardObj.name);
     }
   }
