@@ -78,7 +78,16 @@ async function checkCards(cards, query) {
   }
 }
 
+function setOutput(text) {
+  document.getElementById('output').innerText = text;
+}
+
 function start() {
+  const urlParams = new URLSearchParams(window.location.search);
+  if(urlParams.has('q')) {
+    document.getElementById('query').value = urlParams.get('q');
+  }
+
   document.getElementById('checkButton').addEventListener('click', async (event) => {
     event.preventDefault();
     event.stopPropagation();
@@ -88,6 +97,11 @@ function start() {
     const query = document.getElementById('query').value;
     /** @type {string} */
     const cardListText = document.getElementById('cardList').value;
+
+    const url = new URL(window.location);
+    url.searchParams.set('q', query);
+    window.history.replaceState({ path: url.href }, '', url.href);
+
     const cards = cardListText
       .split('\n')
       .map((line) => {
@@ -100,8 +114,4 @@ function start() {
     const cardSet = new Set(cards);
     await checkCards([...cardSet], query);
   });
-}
-
-function setOutput(text) {
-  document.getElementById('output').innerText = text;
 }
